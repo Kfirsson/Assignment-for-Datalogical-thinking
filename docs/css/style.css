@@ -1,19 +1,22 @@
-/* Feel free to change me and make me your own! */
-
 body {
-  background-color: #7ae5ef; 
-  font-family: Georgia, serif; 
+  background-color: #deeded; 
+  font-family: Tahoma, sans-serif;
 }
 
 article {
   margin-left: 10vw; 
   margin-right: 10vw; 
 }
-
-h1 {
-  font-size: 48px; 
+header
+{
+    text-align: center;
+padding: 2em;
 }
-
+​nav a {margin: 2em;}
+h1 {
+  font-size: 48px;
+  font-weight: bold; 
+}
 h2 {
   font-size: 36px; 
 }
