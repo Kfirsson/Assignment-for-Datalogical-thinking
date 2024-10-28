@@ -14,7 +14,7 @@ padding: 2em;
 }
 ​nav a {margin: 2em;}
 .active
-{fontweight: bold;}
+{font-weight: bold;}
 h1 {
   font-size: 48px;
   font-weight: bold; 
