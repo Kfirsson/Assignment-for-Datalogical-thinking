@@ -1,19 +1,17 @@
 body {
-  background-color: #deeded; 
-  font-family: Helvetica, sans-serif;
+background-color: #deeded; 
+font-family: Helvetica, sans-serif;
 }
-
-article {
-  margin-left: 10vw; 
-  margin-right: 10vw; 
-}
-
 header{
+background-color: ##4c5c5c;
 text-align: center;
+text-color: white;
 padding: 2em;
 }
+​nav {
+}
 
-​nav a {
+nav a {
 margin: 2em;
 }
 
@@ -24,6 +22,11 @@ font-weight: bold;
 h1 {
 font-size: 48px;
 font-weight: bold; 
+}
+
+article {
+  margin-left: 10vw; 
+  margin-right: 10vw; 
 }
 
 h2 {
