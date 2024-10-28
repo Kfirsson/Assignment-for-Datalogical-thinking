@@ -15,10 +15,13 @@ nav a {
   margin: 2em;
   padding: 1em 2em;
   color: #ffffff;
+  text-decoration: none;
 }
 
 .active{
   font-weight: bold;
+  color: #4c5c5c;
+  background-color: #ffffff;
 }
 
 h1 {
