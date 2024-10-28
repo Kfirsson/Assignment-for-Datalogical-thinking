@@ -1,6 +1,7 @@
 body {
   background-color: #deeded; 
   font-family: Helvetica, sans-serif;
+  margin: 6em auto 19em;
 }
 header{
   background-color: #4c5c5c;
@@ -31,7 +32,7 @@ h1 {
 }
 
 article {
-  margin-left: auto; 
+  margin-left: 20%; 
   margin-right: auto;
 }
 
