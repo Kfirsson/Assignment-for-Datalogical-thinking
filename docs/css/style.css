@@ -31,10 +31,10 @@ h1 {
 }
 
 article {
-margin: 0 6em 0em;
+margin: 0 auto 0em;
   padding: 2em;
   background-color: #deeded;
-  max-width:60px;
+  max-width:600px;
 }
 
 h2 {
