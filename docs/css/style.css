@@ -1,7 +1,6 @@
 body {
-  background-color: #deeded; 
+  background-color: #ffffff;
   font-family: Helvetica, sans-serif;
-  margin: 6em auto 19em;
 }
 header{
   background-color: #4c5c5c;
@@ -32,8 +31,9 @@ h1 {
 }
 
 article {
-  margin-left: 20%; 
-  margin-right: auto;
+margin: 0 6em 0em;
+  padding: 2em;
+  background-color: #deeded; 
 }
 
 h2 {
