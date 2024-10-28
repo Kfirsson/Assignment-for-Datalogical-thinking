@@ -1,27 +1,29 @@
 body {
-background-color: #deeded; 
-font-family: Helvetica, sans-serif;
+  background-color: #deeded; 
+  font-family: Helvetica, sans-serif;
 }
 header{
-background-color: #4c5c5c;
-text-align: center;
-color: #ffffff;
-padding: 2em;
+  background-color: #4c5c5c;
+  text-align: center;
+  color: #ffffff;
+  padding: 2em;
 }
 ​nav {
 }
 
 nav a {
-margin: 2em;
+  margin: 2em;
+  padding: 2em;
+  color: #ffffff;
 }
 
 .active{
-font-weight: bold;
+  font-weight: bold;
 }
 
 h1 {
-font-size: 48px;
-font-weight: bold; 
+  font-size: 48px;
+  font-weight: bold; 
 }
 
 article {
@@ -30,20 +32,20 @@ article {
 }
 
 h2 {
-font-size: 36px; 
+  font-size: 36px; 
 }
 
 p {
-font-size: 20px; 
+  font-size: 20px; 
 }
 
 ul {
-font-size: 20px; 
-list-style-type: none; 
+  font-size: 20px; 
+  list-style-type: none; 
 }
 
 code {
-font-family: 'Courier New', monospace; 
+  font-family: 'Courier New', monospace; 
 }
 
 footer{
@@ -51,17 +53,17 @@ footer{
 }
 
 .copyright {
-border-top: 1px solid black;
-display: flex;
-margin: auto;
-padding: 10px;
+  border-top: 1px solid black;
+  display: flex;
+  margin: auto;
+  padding: 10px;
 }
 
 img.copyright_logo {
-width: 1vw;
-margin:.15vw;
+  width: 1vw;
+  margin:.15vw;
 }
 
 .course-logo {
-width: 35vw;
+  width: 35vw;
 }
