@@ -12,7 +12,7 @@ header{
 }
 
 nav a {
-  margin: 2em;
+  margin: 1em;
   padding: 1em 2em;
   color: #ffffff;
   text-decoration: none;
@@ -31,10 +31,10 @@ h1 {
 }
 
 article {
-margin: 0 auto 0em;
+margin: 0 auto 0;
   padding: 2em;
   background-color: #deeded;
-  max-width:600px;
+  max-width:800px;
 }
 
 h2 {
@@ -47,7 +47,11 @@ p {
 
 ul {
   font-size: 20px; 
-  list-style-type: none; 
+  list-style-type: circle; 
+}
+img
+{
+width: 100%  
 }
 
 code {
