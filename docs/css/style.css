@@ -20,18 +20,15 @@ nav a {
   border-radius: 25px;
    white-space: nowrap
 }
-
 .active{
   font-weight: bold;
   color: #4c5c5c;
   background-color: #ffffff;
 }
-
 h1 {
   font-size: 48px;
   font-weight: bold; 
 }
-
 article {
 margin: 0 auto 0;
   padding: 2em;
@@ -58,7 +55,6 @@ margin-top:0;
 
 .container {
   display: flex;
-   border: solid;
    margin: 1em;
   padding: 1em 1em 0em 0em;
    }
