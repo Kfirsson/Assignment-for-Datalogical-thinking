@@ -1,30 +1,53 @@
-BEGIN
-   DECLARE df AS DATAFRAME BY READING 'NewsDB-Python/datatsets/dataset.csv'
-   DECLARE keywords AS LIST OF STRINGS BY SPLITTING 'Keywords' COLUMN BY ';'
-   DECLARE keyword_list AS LIST OF STRINGS BY FLATTENING keywords
-   DECLARE counter AS COUNTER FOR keyword_list
-   SET ten_most_common TO counter.MOST_COMMON(10)
+# Initialize Data and Variables
+1. Read dataset from 'NewsDB-Python/datasets/dataset.csv' into a DataFrame df
+2. Initialize removed_keywords as an empty list
+3. Initialize top_5_keywords as an empty list
 
-   DECLARE five_most_common AS LIST OF STRINGS BY EXTRACTING KEYWORDS FROM ten_most_common[0:5]
-   SET articles_with_top_keywords TO df WHERE 'Keywords' CONTAINS ANY OF five_most_common
-   SET articles_with_top_keywords['Description'] TO FIRST 250 CHARACTERS OF articles_with_top_keywords['Description']
+# Interactive Keyword Exclusion Process
+4. Populate top_5_keywords with the top 5 most frequent keywords in df['Keywords']
+5. While True:
+6.   Display top_5_keywords and their frequencies
+7.   user_input = input("Enter the number of the keyword to remove, or 'done' to finish: ")
+8.   If user_input == 'done':
+9.     break
+10.    try:
+11.      to_remove = [int(num) - 1 for num in user_input.split(',')]
+12.      removed_keywords.extend([top_5_keywords[i] for i in to_remove])
+13.      top_5_keywords = [keyword for keyword in top_5_keywords if keyword not in removed_keywords]
 
-   DECLARE authors AS LIST OF STRINGS BY FILTERING df WHERE 'Keywords' CONTAINS ANY OF keywords IN ten_most_common
-   SET author_counter AS COUNTER FOR authors
-   SET top_ten_authors TO author_counter.MOST_COMMON(10)
+# Filter Articles by Top Keywords
+14. keywords_set = set(top_5_keywords)  # Use the remaining top 5 keywords
+15. articles_top_keywords = df[df['Keywords'].apply(lambda x: any(keyword in x for keyword in keywords_set))]
+16. Print the number of articles matching top 5 keywords: len(articles_top_keywords)
 
-   OPEN FILE 'index.html' FOR WRITING
-   WRITE HTML CONTENT INCLUDING:
-      - HEAD WITH TITLE, STYLESHEETS, AND FONTS
-      - BODY CONTAINING:
-         - H1 FOR TOP 10 KEYWORDS AND FREQUENCY
-         - P WITH RESEARCH AND DATASET QUESTIONS
-         - TABLE OF ten_most_common
-         - H1 FOR ARTICLES WITH TOP 5 KEYWORDS
-         - TABLE OF articles_with_top_keywords
-         - H1 FOR TOP 10 AUTHORS AND THEIR KEYWORD FREQUENCY
-         - LOOP THROUGH top_ten_authors TO:
-            - LIST THEIR ASSOCIATED KEYWORDS AND FREQUENCIES
-            - WRITE ARTICLES FOR EACH AUTHOR AS NECESSARY
-   CLOSE FILE
-END
+# Identify Authors and Articles
+17. Initialize author_articles as an empty list
+18. For each row in df:
+19.   For each keyword in top_5_keywords:
+20.     If keyword is in row['Keywords']:
+21.       Append {'Keyword': keyword, 'Author': row['Author'], 'Title': row['Title'], 'Permalink': row['Permalink'], 'Description': row['Description']} to author_articles
+22. Remove duplicates from author_articles
+
+# Generate Word Cloud
+23. descriptions_top_keywords = ' '.join(articles_top_keywords['Description'].dropna())
+24. Generate word cloud from descriptions_top_keywords and save as SVG
+25. Encode the SVG for HTML display
+26. Save word cloud in 'NewsDB-Python/reports/Descriptions_word_cloud.html'
+
+# Generate Output Files
+27. Create Markdown file to summarize keyword analysis and list articles
+28. Initialize report_md as a string
+29. For each keyword in top_5_keywords:
+30.   Append f". {keyword}\n\n" to report_md
+31. For each row in articles_top_keywords:
+32.   Append f"- #### Title: <a href='{row['Permalink']}'>{row['Title']}</a>\n" to report_md
+33.   Append f"**Author**: {row['Author']}\n" to report_md
+34.   Append f"**|** **Description**: {row['Description']}\n\n" to report_md
+35. For each article in author_articles:
+36.   Append f"- **Keyword**: {article['Keyword']}\n" to report_md
+37.   Append f"  - **Author**: {article['Author']}\n" to report_md
+38.   Append f"  - **Title**: <a href='{article['Permalink']}'>{article['Title']}</a>\n" to report_md
+39.   Append f"  - **Description**: {article['Description']}\n\n" to report_md
+40. Append f"TASK 4: Word cloud based on descriptions of all articles matching the keywords\n![image](NewsDB-Python/reports/Descriptions_word_cloud.svg)\n" to report_md
+41. Write report_md to 'NewsDB-Python/reports/keyword_analysis_report.md'
+42. Save HTML report to 'NewsDB-Python/reports/report.html'
