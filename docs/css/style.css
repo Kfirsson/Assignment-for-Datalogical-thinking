@@ -60,10 +60,11 @@ ul {
     max-width: 80%;
     max-height: 80%;
     float: center;
+    padding: 20px;
   }
   
   .participant {
-        padding-left: 20px;
+        padding: 2em 0 0 0;
     float: left;
     align-self: end;
   }
