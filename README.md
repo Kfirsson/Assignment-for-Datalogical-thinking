@@ -8,4 +8,4 @@ a dataset, and use pseudocode to design an algorithm to process that dataset in 
 ## About the Course
 *Datalogical Thinking* is a course taught at the [University of Borås](https://www.hb.se) (Sweden), as part of the [MA in Information Science: Digital Environments](https://www.hb.se/en/international-student/program/programmes/masters-programme-in-information-science-digital-environments/). The course, in its current form, was designed by Wout Dillen, and taught for the first time in the autumn of 2023, with the help of his colleagues David Gunnarson Lorentzen, Kayvan Yousefi Mojir, Elisa Tattersall Wallin, and Anton Carlander Borgström.
 
-[*Go to site*](//docs/index.html)
+[*Go to site*]((https://kfirsson.github.io/Assignment-for-Datalogical-thinking/index.html))
