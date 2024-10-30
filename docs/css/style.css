@@ -44,9 +44,8 @@ p {
   font-size: 20px; 
 }
 
-ul {
-  font-size: 20px; 
-  list-style-type: circle; 
+ol {
+  font-size: 20px;  
 }
 
 .container h3 {
