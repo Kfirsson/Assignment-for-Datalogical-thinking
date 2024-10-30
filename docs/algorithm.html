@@ -31,13 +31,13 @@ from io import BytesIO<br>
 import matplotlib.pyplot as plt<br>
 from collections import Counter<br>
 import re<br>
-
+<br>
 # Read the dataset from CSV<br>
 df = pd.read_csv('NewsDB-Python/datasets/dataset.csv')<br>
-
+<br>
 # Initialize removed keywords list<br>
 removed_keywords = []<br>
-
+<br>
 # Interactive keyword exclusion process<br>
 top_5_keywords = []<br>
 while True:<br>
@@ -50,85 +50,85 @@ while True:<br>
         all_keywords = df['Keywords'].str.split(';').explode().str.strip()<br>
         keyword_counts = all_keywords.value_counts()<br>
         top_5_keywords = [keyword for keyword, count in keyword_counts.items() if keyword not in removed_keywords][:5]<br>
-    
+    <br>
     print("\nCurrent Top Keywords and Their Frequencies:")<br>
     for idx, keyword in enumerate(top_5_keywords):<br>
         print(f"{idx + 1}. {keyword}")<br>
-        
-    user_input = input("Enter the number of the keyword you want to remove (comma-separated if multiple), or 'done' to finish: ")<br>
-    if user_input.lower() == 'done':<br>
-        break<br>
-    try:<br>
-        to_remove = [int(num) - 1 for num in user_input.split(',')]<br>
-        removed_keywords.extend([top_5_keywords[i] for i in to_remove])<br>
-        top_5_keywords = [keyword for keyword in top_5_keywords if keyword not in removed_keywords]<br>
-    except ValueError:
-        print("Invalid input. Please enter the number(s) of the keyword you want to remove.")<br>
 <br>
-# Task 2: Articles matching the top 5 keywords after removal<br>
-keywords_set = set(top_5_keywords)  # Use the remaining keywords<br>
-articles_top_keywords = df[df['Keywords'].apply(lambda x: any(keyword in x for keyword in keywords_set))] # filter articles where at least one keyword is found in 'Keywords' column<br>
-print("Number of articles matching top 5 keywords:", len(articles_top_keywords))<br>
+    user_input = input("Enter the number of the keyword you want to remove (comma-separated if multiple), or 'done' to finish: ")
+    if user_input.lower() == 'done':
+        break
+    try:
+        to_remove = [int(num) - 1 for num in user_input.split(',')]
+        removed_keywords.extend([top_5_keywords[i] for i in to_remove])
+        top_5_keywords = [keyword for keyword in top_5_keywords if keyword not in removed_keywords]
+    except ValueError:
+        print("Invalid input. Please enter the number(s) of the keyword you want to remove.")
+
+# Task 2: Articles matching the top 5 keywords after removal
+keywords_set = set(top_5_keywords)  # Use the remaining keywords
+articles_top_keywords = df[df['Keywords'].apply(lambda x: any(keyword in x for keyword in keywords_set))] # filter articles where at least one keyword is found in 'Keywords' column 
+print("Number of articles matching top 5 keywords:", len(articles_top_keywords))
 
 
-# Task 3: Identify authors discussing the top 5 keywords after removal<br>
-author_articles = []  # list to store relevant information from each article<br>
-for index, row in df.iterrows():  # iterate through rows of dataframe df<br>
-    for keyword in top_5_keywords: # for every keyword in top 5 remaining keywords<br>
-        if str(keyword) in row['Keywords']: # check if the keyword is present in 'Keywords' column of current row<br>
-            author_articles.append({  # if so, add relevant info to author_articles list<br>
-                'Keyword': keyword,<br>
-                'Author': row['Author'],<br>
-                'Title': row['Title'],<br>
-                'URL': row['Permalink'],<br>
-                'Description': row['Description'] # 'Description': row['Description'][:250]  # Uncomment this line to limit description length to first 250 characters<br>
-            })<br>
-author_articles = [dict(t) for t in {tuple(d.items()) for d in author_articles}]  # Remove duplicates by converting to set and back to list<br>
+# Task 3: Identify authors discussing the top 5 keywords after removal
+author_articles = []  # list to store relevant information from each article
+for index, row in df.iterrows():  # iterate through rows of dataframe df
+    for keyword in top_5_keywords: # for every keyword in top 5 remaining keywords
+        if str(keyword) in row['Keywords']: # check if the keyword is present in 'Keywords' column of current row
+            author_articles.append({  # if so, add relevant info to author_articles list
+                'Keyword': keyword,
+                'Author': row['Author'],
+                'Title': row['Title'], 
+                'URL': row['Permalink'],
+                'Description': row['Description'] # 'Description': row['Description'][:250]  # Uncomment this line to limit description length to first 250 characters
+            })
+author_articles = [dict(t) for t in {tuple(d.items()) for d in author_articles}]  # Remove duplicates by converting to set and back to list
 
-# Task 4: Word cloud based on descriptions of articles matching the remaining top 5 keywords<br>
-descriptions_top_keywords = ' '.join(articles_top_keywords['Description'].dropna()) # join all descriptions in a single string, dropping NaNs<br>
-wordcloud = WordCloud(width=1200, height=960).generate(descriptions_top_keywords)  # generate word cloud with the joined descriptions<br>
-plt.figure(figsize=(8, 4))<br>
-plt.imshow(wordcloud, interpolation='bilinear')<br>
-plt.axis('off')<br>
-svg_image = BytesIO()<br>
-plt.savefig(svg_image, format='svg') # Save word cloud as svg image<br>
-encoded_svg = base64.b64encode(svg_image.getvalue()).decode()  # Encoding the svg image to display in HTML report<br>
-wordcloud_svg = f"<img src='data:image/svg+xml;base64,{encoded_svg}' width='1200' height='960'/>" <br>
-with open("NewsDB-Python/reports/Descriptions_word_cloud.html", "w") as f: # Save image in html report<br>
-    f.write(wordcloud_svg)<br>
-print("Word cloud saved to NewsDB-Python/reports/Descriptions_word_cloud.html")<br>
+# Task 4: Word cloud based on descriptions of articles matching the remaining top 5 keywords
+descriptions_top_keywords = ' '.join(articles_top_keywords['Description'].dropna()) # join all descriptions in a single string, dropping NaNs
+wordcloud = WordCloud(width=1200, height=960).generate(descriptions_top_keywords)  # generate word cloud with the joined descriptions
+plt.figure(figsize=(8, 4))
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis('off')
+svg_image = BytesIO()
+plt.savefig(svg_image, format='svg') # Save word cloud as svg image
+encoded_svg = base64.b64encode(svg_image.getvalue()).decode()  # Encoding the svg image to display in HTML report
+wordcloud_svg = f"&lt;img src='data:image/svg+xml;base64,{encoded_svg}' width='1200' height='960'/&gt;" 
+with open("NewsDB-Python/reports/Descriptions_word_cloud.html", "w") as f: # Save image in html report
+    f.write(wordcloud_svg)
+print("Word cloud saved to NewsDB-Python/reports/Descriptions_word_cloud.html") 
 
-# Output keyword analysis report in Markdown format<br>
-report_md = f"# Keyword Analysis Report\n## TASK 1: Display the top five keywords and their frequencies.\n### Which five keywords occur most frequently in the dataset?\n\n"<br>
-for keyword in top_5_keywords:  # Output the remaining keywords<br>
-    report_md += f"{top_5_keywords.index(keyword) + 1}. {keyword}\n\n"<br>
-report_md += "## TASK 2: Articles matching the top five keywords\n### Which articles match the five most frequently occurring keywords?\n\n"<br>
-report_md += f"<ol>"<br>
-for index, row in articles_top_keywords.iterrows():  # Output titles, authors and descriptions of relevant articles<br>
-    report_md += f"<li>\n\n"<br>
-    report_md += f"---\n\n"<br>
-    report_md += f"**Keyword**: {row['Keywords']}\n\n"<br>
-    # report_md += f"{top_5_keywords(keyword)}\n\n"<br>
-    report_md += f"\n\n"<br>
-    report_md += f"**Title**: <a href='{row['Permalink']}'>{row['Title']}</a>\n"<br> 
-    report_md += f"\n\n"<br>    
-    report_md += f"**Author**: {row['Author']}\n"<br>
-    report_md += f"\n\n"<br>    
-    report_md += f"**Description**: {row['Description']}\n\n"<br>
-    report_md += f"</li>"<br>
-report_md += f"</ol>\n\n"<br>
-report_md += "## TASK 3: Identify authors discussing the top five keywords\n### Which authors discuss the top five keywords?\n\n"<br>
-report_md += f"<ol>"<br>
-for article in author_articles:  # Output relevant info from each article in author_articles list<br>
-    report_md += f"<li>\n\n"<br>
-    report_md += f"---\n\n"<br>    
+# Output keyword analysis report in Markdown format
+report_md = f"# Keyword Analysis Report\n## TASK 1: Display the top five keywords and their frequencies.\n### Which five keywords occur most frequently in the dataset?\n\n"
+for keyword in top_5_keywords:  # Output the remaining keywords
+    report_md += f"{top_5_keywords.index(keyword) + 1}. {keyword}\n\n"
+report_md += "## TASK 2: Articles matching the top five keywords\n### Which articles match the five most frequently occurring keywords?\n\n"
+report_md += f"&lt;ol&gt;"
+for index, row in articles_top_keywords.iterrows():  # Output titles, authors and descriptions of relevant articles
+    report_md += f"&lt;li&gt;\n\n"
+    report_md += f"---\n\n"
+    report_md += f"**Keyword**: {row['Keywords']}\n\n"
+    # report_md += f"{top_5_keywords(keyword)}\n\n"
+    report_md += f"\n\n"
+    report_md += f"**Title**: &lt;a href='{row['Permalink']}'&gt;{row['Title']}&lt;/a&gt;\n" 
+    report_md += f"\n\n"    
+    report_md += f"**Author**: {row['Author']}\n"
+    report_md += f"\n\n"    
+    report_md += f"**Description**: {row['Description']}\n\n"
+    report_md += f"&lt;/li&gt;"
+report_md += f"&lt;/ol&gt;\n\n" 
+report_md += "## TASK 3: Identify authors discussing the top five keywords\n### Which authors discuss the top five keywords?\n\n"
+report_md += f"&lt;ol&gt;"
+for article in author_articles:  # Output relevant info from each article in author_articles list
+    report_md += f"&lt;li&gt;\n\n"
+    report_md += f"---\n\n"    
     report_md += f"- **Keyword**: {article['Keyword']}\n"   
     report_md += f"- **Author**: {article['Author']}\n"
-    report_md += f"- **Title**: <a href='{article['URL']}'>{article['Title']}</a>\n" 
+    report_md += f"- **Title**: &lt;a href='{article['URL']}'&gt;{article['Title']}&lt;/a&gt;\n" 
     report_md += f"- **Description**: {article['Description']}\n\n"  
-    report_md += f"</li>"
-report_md += f"</ol>\n\n" 
+    report_md += f"&lt;/li&gt;"
+report_md += f"&lt;/ol&gt;\n\n" 
 report_md += "## TASK 4: Word cloud based on descriptions of all articles in the dataset\n\n"
 report_md += f"![image](NewsDB-Python/reports/Descriptions_word_cloud.svg)\n"
 with open("NewsDB-Python/reports/keyword_analysis_report.md", "w") as f:  # Save markdown report 
@@ -137,40 +137,41 @@ print("Markdown report saved to NewsDB-Python/reports/keyword_analysis_report.md
 
 
 # Output keyword analysis report in HTML format
-html_template = """<!DOCTYPE html>
-<html lang="en">
+html_template = """&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
 
-<head>
-    <link href="style_article.css" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keyword Analysis Report</title>
-</head>
-<body>
-<h1>Keyword Analysis Report</h1>
-<h2>TASK 1: Display the top five keywords and their frequencies. </h2>
-<h4>Which five keywords occur most frequently in the dataset?</h4>
-<ol>{keywords}</ol>
-<hr>
-<h2>TASK 2: Articles matching the top five keywords</h2>
-<h4>Which articles match the five most frequently occurring keywords</h4>
-<ol>{articles}</ol>
-<hr>
-<h2>TASK 3: Identify authors discussing the top five keywords</h2>
-<h4>Which authors discuss the top five keywords?</h4>
+&lt;head&gt;
+    &lt;link href="style_article.css" rel="stylesheet"&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Keyword Analysis Report&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Keyword Analysis Report&lt;/h1&gt;
+&lt;h2&gt;TASK 1: Display the top five keywords and their frequencies. &lt;/h2&gt;
+&lt;h4&gt;Which five keywords occur most frequently in the dataset?&lt;/h4&gt;
+&lt;ol&gt;{keywords}&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;TASK 2: Articles matching the top five keywords&lt;/h2&gt;
+&lt;h4&gt;Which articles match the five most frequently occurring keywords&lt;/h4&gt;
+&lt;ol&gt;{articles}&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2&gt;TASK 3: Identify authors discussing the top five keywords&lt;/h2&gt;
+&lt;h4&gt;Which authors discuss the top five keywords?&lt;/h4&gt;
 {author_articles}
-<hr>
-<h2>TASK 4: Word cloud based on descriptions of all articles in the dataset</h2>
-<div>{wordcloud}</div>
-</body>
-</html>"""  # HTML template with placeholders for various parts of report
-keywords = "\n".join(f'<li>{keyword}</li>' for keyword in top_5_keywords) 
-articles = "\n".join(f'<h3>Keyword: {article["Keyword"]}</h3><p><a href="{row["Permalink"]}">{row["Title"]}</a></p><p><strong>{row["Author"]}:</strong> {row["Description"]}</p><br><br>' for index, row in articles_top_keywords.iterrows())  
-author_articles = "\n".join(f'<h3>Keyword: {article["Keyword"]}</h3><p>Author: {article["Author"]}</p><p>Title: <a href="{article["URL"]}">{article["Title"]}</a></p><p>Description: {article["Description"]}</p>' for article in author_articles)  
+&lt;hr&gt;
+&lt;h2&gt;TASK 4: Word cloud based on descriptions of all articles in the dataset&lt;/h2&gt;
+&lt;div&gt;{wordcloud}&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;"""  # HTML template with placeholders for various parts of report
+keywords = "\n".join(f'&lt;li&gt;{keyword}&lt;/li&gt;' for keyword in top_5_keywords) 
+articles = "\n".join(f'&lt;h3&gt;Keyword: {article["Keyword"]}&lt;/h3&gt;&lt;p&gt;&lt;a href="{row["Permalink"]}"&gt;{row["Title"]}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;&lt;strong&gt;{row["Author"]}:&lt;/strong&gt; {row["Description"]}&lt;/p&gt;&lt;br&gt;&lt;br&gt;' for index, row in articles_top_keywords.iterrows())  
+author_articles = "\n".join(f'&lt;h3&gt;Keyword: {article["Keyword"]}&lt;/h3&gt;&lt;p&gt;Author: {article["Author"]}&lt;/p&gt;&lt;p&gt;Title: &lt;a href="{article["URL"]}"&gt;{article["Title"]}&lt;/a&gt;&lt;/p&gt;&lt;p&gt;Description: {article["Description"]}&lt;/p&gt;' for article in author_articles)  
 output = html_template.format(keywords=keywords, articles=articles, wordcloud=wordcloud_svg, author_articles=author_articles) # Format the HTML template with the actual data
 with open('NewsDB-Python/reports/report.html', 'w') as f:  # Save the html report 
     f.write(output)
-print("HTML report saved to NewsDB-Python/reports/report.html")  
+print("HTML report saved to NewsDB-Python/reports/report.html")   
+
                 </code>
             </article>
         </main>

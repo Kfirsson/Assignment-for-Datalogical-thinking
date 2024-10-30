@@ -74,7 +74,8 @@ margin-top:0;
 }
 
 code {
-  font-family: 'Courier New', monospace; 
+  font-family: 'Courier New', monospace;
+  display: block; 
 }
 
 footer{
