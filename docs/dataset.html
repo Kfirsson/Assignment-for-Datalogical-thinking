@@ -24,11 +24,11 @@
                 <h2>The long and winding road: Searching for, parsing and curating our data</h2>
                 
                     <p>We started our group project with a relatively clear idea of what we wanted to find out —  
-and this led us to believe that putting together the necessary dataset would be a relatively straightforward affair: we wanted to know “how Google has been critiqued in the academic literature”  and we agreed we would use Primo to get our data.</p>
+and this led us to believe that putting together the necessary dataset would be a relatively straightforward affair: we wanted to know “how Google has been critiqued in the academic literature” and we agreed we would use Primo to get our data.</p>
 
 <p>But: Homō putat, Deus mūtat — or, in our case, Datum mūtat.</p> 
 
-<p>We conducted a quick initial search on Primo for <b><u>[google critique]</b></u> and this yielded a staggering 60,047 results.</p>
+<p>We conducted a quick initial search on Primo for <b>[google critique]</b> and this yielded a staggering 60,047 results.</p>
 
 <img src="img/curate1.jpg" alt="first search on Primo" align="center" width="500" height="300"> 
 
@@ -53,7 +53,7 @@ and this led us to believe that putting together the necessary dataset would be 
 
 <p>These most obvious limitations led us to agree to revisit our search on Primo, to refine it differently in order to gain access to a more discrete set of search results while at the same time expanding the scope of the search.</p>
 
-<p>We changed the search terms to <b><u>[“google critique” OR “criticizing google” OR “critical of google”]</b></u>. This yielded a smaller set of 715 results — further refining it, to only peer-reviewed journals, reduced it to a manageable dataset with 53 results.</p>
+<p>We changed the search terms to <b>[“google critique” OR “criticizing google” OR “critical of google”]</b>. This yielded a smaller set of 715 results — further refining it, to only peer-reviewed journals, reduced it to a manageable dataset with 53 results.</p>
 
 <img src="img/curate5.jpg" alt="second Primo search refined" align="center" width="500" height="300">
 
@@ -68,7 +68,6 @@ and this led us to believe that putting together the necessary dataset would be 
 </li> 
 </b></ol>
 
-
 <p>With these questions in mind, we set about curating our data:</p>
 
 <p>Firstly, we removed all attributes (columns) that are irrelevant to our research questions, leaving us with <b> Title, Author, Keywords, Description, Permalink</b>.</p>
@@ -80,6 +79,15 @@ and this led us to believe that putting together the necessary dataset would be 
 
 <p>This launched an interesting and somewhat protracted debate about how to approach the issue. In a real-world scenario, we would most probably simply use the 49 items left in our dataset and move on. But the assignment’s 50-item minimum unleashed a discussion about data integrity, human bias and curation more generally. The importance of metadata was pitted against the question of “who decides what to add or remove and why”. In the end, we (some of us more reluctantly than others) decided that we would have to add one entry manually to meet all the requirements of the assignment and a topically relevant article from the first search was added to the dataset so that we could move forward.</p>    
 
+<div id="CSVTable"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//jquerycsvtotable.googlecode.com/files/jquery.csvToTable.js"></script>
+
+<script>
+$(function() {
+  $('#CSVTable').CSVToTable('data/dataset.csv');
+});
+</script>
                 
             </article>
         </main>
