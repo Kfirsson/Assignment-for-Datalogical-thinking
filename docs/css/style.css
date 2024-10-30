@@ -8,7 +8,10 @@ header{
   color: #ffffff;
   padding: 2em;
 }
-
+.homeimg
+{
+width: 100%  
+}
 nav a {
   margin: 1em;
   padding: 5px 10px;
@@ -48,9 +51,28 @@ ul {
   font-size: 20px; 
   list-style-type: circle; 
 }
-img
-{
-width: 100%  
+
+
+  .container {
+    display: flex;
+    align-items:center; 
+    
+     }
+  
+  .portrait {
+    max-width: 80%;
+    max-height: 80%;
+    float: center;
+    padding: 20px;
+    padding-bottom: 17px;
+  }
+  
+  .participant {
+    float: left;
+    align-self: end;
+  }
+.participant p {
+  font-size: 17px;
 }
 
 code {
