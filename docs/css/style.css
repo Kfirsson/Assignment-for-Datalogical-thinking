@@ -48,11 +48,25 @@ ul {
   font-size: 20px; 
   list-style-type: circle; 
 }
-img
-{
-width: 100%  
-}
 
+
+  .container {
+    display: flex;
+    align-items:center; 
+    
+     }
+  
+  .portrait {
+    max-width: 80%;
+    max-height: 80%;
+    float: center;
+  }
+  
+  .participant {
+        padding-left: 20px;
+    float: left;
+    align-self: end;
+  }
 code {
   font-family: 'Courier New', monospace; 
 }
