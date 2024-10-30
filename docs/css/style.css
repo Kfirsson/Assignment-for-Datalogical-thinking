@@ -36,7 +36,7 @@ article {
 margin: 0 auto 0;
   padding: 2em;
   background-color: #deeded;
-  max-width:800px;
+  max-width:950px;
 }
 
 h2 {
@@ -52,27 +52,29 @@ ul {
   list-style-type: circle; 
 }
 
+.container h3 {
+margin-top:0;  
+}
 
-  .container {
-    display: flex;
-    align-items:center; 
-    
-     }
+.container {
+  display: flex;
+   border: solid;
+   margin: 1em;
+  padding: 1em 1em 0em 0em;
+   }
+.container h3 {
+margin-top:0;  
+}
   
-  .portrait {
-    max-width: 80%;
-    max-height: 80%;
-    float: center;
-    padding: 20px;
-    padding-bottom: 17px;
+.portrait {
+   max-width: 80%;
+   max-height: 80%;
+   padding: 1em;
+   padding-top: 0;
   }
-  
-  .participant {
-    float: left;
-    align-self: end;
-  }
+
 .participant p {
-  font-size: 17px;
+  font-size: 15px;
 }
 
 code {
@@ -95,6 +97,3 @@ img.copyright_logo {
   margin:.15vw;
 }
 
-.course-logo {
-  width: 35vw;
-}
