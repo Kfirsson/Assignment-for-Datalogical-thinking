@@ -62,10 +62,11 @@ margin-top:0;
 }
   
 .portrait {
-   max-width: 80%;
-   max-height: 80%;
    padding: 1em;
    padding-top: 0;
+  }
+.portrait img{
+   max-width: 150px;
   }
 
 .participant p {
