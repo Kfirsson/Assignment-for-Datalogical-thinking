@@ -20,6 +20,43 @@
         </header>
         <main>
                 <h2>Our algorithm</h2>
+        <p>After we had edited the data in several processes, the next step was to create an algorithm. However, it should be noted that the steps of data curation and algorithm building go hand in hand and are often a trial-and-error case. We often adjusted when the results didn´t appear as expected. As a group, we thought together about the algorithm and had to curate the dataset to build our algorithm accurately. We pragmatically defined what the algorithm should do in simple, natural language.</p>
+<p> To briefly explain how an algorithm works, it is worth looking at the literature. Dale and Lewis state that an algorithm can be described as a plan of a solution. It contains a set of instructions for solving problems or subproblems in a finite amount of time using a finite amount of data (Dale & Lewis, 2019). To describe it a little more vividly, working with the data and an algorithm can be compared to a baking recipe, ergo a step-by-step guide. The ingredients are the input data and the recipe, i.e. the step-by-step instructions, is the algorithm.
+</p>
+            <p>Pseudocode serves as a readable description of the algorithm. The special feature here is that pseudocode does not belong to a programming language but is written in everyday language and is therefore generally easier to implement. Pseudocode serves as a bridge or interface between a natural language and a programming language (in our case HTML). With the help of pseudocode, we described the algorithm and formulated the following steps:
+</p>
+<ol>
+<li>
+Initialisation of data and variables.<br>
+ Read our curated data from the CSV file and read it into a DataFrame.<br> 
+    This should result in two lists: Remove Keyword and Top 5 Keyword.
+</li>
+
+<li>
+ Interactive exclusion process of the keywords.<br>
+ Identify the five most frequent keywords and save them in the Top 5 Keywords list.<br> An interactive process should then allow users to remove a specific keyword from the Top 5 Keywords list through a loop if necessary until they indicate completion.   
+</li>
+    <li>
+    Filter the articles associated with the top keywords.<br>
+ Now take the remaining top 5 keywords and filter out the articles from the dataset that are related to these keywords.
+</li>
+    <li>
+    Identify the authors and the articles.<br>
+ Check each of the articles to see if one of the top 5 keywords is included.<br>
+        List the relevant headers (keyword, author, title, permalink and description).<br>
+        Remove duplicates to guarantee the uniqueness of the single entries. 
+</li>
+    <li>
+    Generate a word cloud.<br>
+ Merge all descriptions from the filtered articles into a single string.<br> Then generate a word cloud based on the merged text.<br> Save the word cloud as SVG and encode it for HTML display.
+</li>
+    <li>
+     Generate output files.<br>
+ Create a Markdown file to summarise the keyword analysis and list the articles.<br> 
+        Now generate an HTML report that includes sections for top keywords, relevant articles, authors discussing the keywords, and the world cloud.
+</li>
+</ol>
+            <h3>The algorithm in Python</h3>
                 <code>
 import pandas as pd<br>
 from wordcloud import WordCloud, ImageColorGenerator<br>
