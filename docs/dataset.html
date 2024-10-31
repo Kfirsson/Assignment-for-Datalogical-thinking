@@ -74,6 +74,7 @@ and this led us to believe that putting together the necessary dataset would be 
 <li>We removed all attributes (columns) that are irrelevant to our research questions, leaving us with <b> Title, Author, Keywords, Description, Permalink</b>.</li>
 <li>We removed all duplicate article entries and all Swedish keywords that appeared as duplicates of listed English ones.</li>
 <li>We manually checked every single field in every single row — to ensure it was filled and filled correctly.</li>
+</ul>
 
 <p>We removed four entries: One article, included in our dataset three times, was on phytochemical analysis and seems to only have been included in the search results as one of its listed references, including the words “<b>Critical</b> Anthropological Perspectives”, was according to the bibliography accessed using <b>Google</b> Books. A second article, although topically relevant to our research (a chapter on the role of tech companies in government surveillance) came from the <i>Harvard Law Review</i>. As law reviews are typically considered secondary scholarship, this particular publication is student-edited and neither the author nor abstract metadata is available (common practice for law reviews in general and the <i>Harvard Law Review</i> in particular), we decided to remove this article as well. Our diligent curation had thus brought us to a minor impasse: we had reduced the number of articles in our dataset to 49 — for an assignment that requires at least 50 items. </p>
 
@@ -81,7 +82,7 @@ and this led us to believe that putting together the necessary dataset would be 
 
 <p>As we started running the code and looking at the output, we realized that we had one more curation task to complete. Our keywords included some that we decided were ‘empty’ terms (such as Google or article) and not only concepts that we expected to find in the context of our dataset (such as internet censorship or surveillance capitalism) but also many related to fields of study (such as Media and Communications or Science & Technology) or even research methodologies (such as automated content analysis or methodological problems). Instead of manually editing these out, we opted to leave some of the final curation to the algorithm and the user. Thanks to a few lines of code, the algorithm starts out by displaying the top 5 keywords for review. The user can omit ones of their choosing and the algorithm will display a new updated list; this process is repeated until the user is satisfied with the top 5 keywords and only then does the algorithm move on to the other tasks. Below is a screenshot of how this works in practice:</p>
 
-<img src="img/curate6.jpg" alt="Python code for removing unwanted keywords" align="center" width="300" height="400">
+<img src="img/curate6.jpg" alt="Python code for removing unwanted keywords" align="center" width="600" height="400">
 
 
 <p>Our complete dataset in CSV-format is <a href="https://github.com/Kfirsson/Assignment-for-Datalogical-thinking/blob/main/data/dataset.csv">here</a> on GitHub.</p>
