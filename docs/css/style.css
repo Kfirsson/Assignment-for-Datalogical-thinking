@@ -47,6 +47,10 @@ p {
 ol {
   font-size: 20px;  
 }
+.emlist {
+  font-weight:bold;
+}
+
 
 .container h3 {
 margin-top:0;  
