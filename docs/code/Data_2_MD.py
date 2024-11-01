@@ -5,7 +5,7 @@ from io import BytesIO
 import matplotlib.pyplot as plt
 
 # Read the dataset from CSV
-input_file_path = "NewsDB-Python/datasets/dataset.csv"  # Replace with your CSV file path
+input_file_path = "data/dataset.csv"  # Replace with your CSV file path
 md_file_path = "Report.md"  # Replace with the desired markdown file path
 df = pd.read_csv(input_file_path)
 
@@ -62,16 +62,16 @@ wordcloud = WordCloud(width=1200, height=960).generate(descriptions_top_keywords
 
 # Save the word cloud as SVG
 wordcloud_svg = wordcloud.to_svg(embed_font=False)
-with open("NewsDB-Python/reports/Descriptions_word_cloud.svg", "w") as f:
+with open("docs/img/Descriptions_word_cloud.svg", "w") as f:
     f.write(wordcloud_svg)
 
 # Save the word cloud as PNG
-wordcloud.to_file("NewsDB-Python/reports/Descriptions_word_cloud.png")
+wordcloud.to_file("docs/img/Descriptions_word_cloud.png")
 
-print("Word cloud saved to NewsDB-Python/reports/Descriptions_word_cloud.svg and Descriptions_word_cloud.png")
+print("Word cloud saved to docs/img/Descriptions_word_cloud.svg and Descriptions_word_cloud.png")
 
 # Write the results to a markdown file
-with open(md_file_path, 'w') as md:
+with open(md_file_path, 'w', encoding="utf-8") as md:
     md.write("# Dataset report\n\n")
     md.write("**Top 5 Keywords and Their Frequencies**\n\n")
     for idx, keyword in enumerate(top_5_keywords):
@@ -111,6 +111,6 @@ with open(md_file_path, 'w') as md:
             article_idx += 1
     
     md.write("\n\n**Wordcloud based on the descriptions of the articles matching the top five keywords**\n\n")
-    md.write('<img src="NewsDB-Python/reports/Descriptions_word_cloud.svg" onerror="this.onerror=null;this.src=\'NewsDB-Python/reports/Descriptions_word_cloud.png\';">')
+    md.write('<img src="docs/img/Descriptions_word_cloud.svg" onerror="this.onerror=null;this.src=\'docs/img/Descriptions_word_cloud.png\';">')
 
 print(f"Results saved to {md_file_path}")
