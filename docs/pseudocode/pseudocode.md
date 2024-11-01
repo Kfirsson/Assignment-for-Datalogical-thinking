@@ -22,7 +22,7 @@ It prints out the titles of these articles along with their indices.
 Generate Word Cloud:
 
 A word cloud is generated based on the descriptions of the filtered articles.
-The word cloud is saved as an SVG file in the NewsDB-Python/reports/ directory.
+The word cloud is saved as an SVG file in the data/img/ directory.
 Write Results to Markdown File:
 
 The script writes a markdown report containing:
@@ -97,7 +97,7 @@ BEGIN
     IMPORT pandas, WordCloud, base64, BytesIO, matplotlib, Counter, re
     
     // Step 2: Read dataset from CSV file into DataFrame
-    input_file_path = "NewsDB-Python/datasets/dataset.csv"
+    input_file_path = "data/dataset.csv"
     df = pd.read_csv(input_file_path)
     
     removed_keywords = []
@@ -159,11 +159,11 @@ BEGIN
     wordcloud_svg = f"<img src='data:image/svg+xml;base64,{encoded_svg}' width='1200' height='960'/>"
     
     // Step 9: Save word cloud as SVG file
-    WITH open("NewsDB-Python/reports/Descriptions_word_cloud.svg", "w") AS f DO
+    WITH open("data/img//Descriptions_word_cloud.svg", "w") AS f DO
         f.write(wordcloud_svg)
     END WITH
     
-    display("Word cloud saved to NewsDB-Python/reports/Descriptions_word_cloud.svg")
+    display("Word cloud saved to data/img//Descriptions_word_cloud.svg")
     
     // Step 10: Write results to markdown file
     md_file_path = "Report.md"
@@ -199,7 +199,7 @@ BEGIN
                 write(md, f"1. <a href='{permalink}'>{title}</a>\n")
 
         write(md, "\n\n**Wordcloud based on the descriptions of the top five articles**\n\n")             
-        write(md, f"<img src='NewsDB-Python/reports/Descriptions_word_cloud.svg'>")
+        write(md, f"<img src='data/img//Descriptions_word_cloud.svg'>")
     END WITH
     
     display(f"Results saved to {file_path} and {md_file_path}")

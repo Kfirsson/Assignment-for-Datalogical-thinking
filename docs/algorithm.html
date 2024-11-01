@@ -66,9 +66,65 @@ Initialisation of data and variables.<br>
 <p>In our case, Victor agreed to deal with the algorithm process and thus with writing the pseudocode. Over time, however, it became apparent that there was no common basis on which to base our terms. In concrete terms, this means that for example Klara had difficulty formulating her expectations of the algorithm and the data visualisation, and conversely, Victor had difficulty understanding Klara's expectations, as the terms were often unknown or interpreted differently. These different kinds of approaches have led us to make improvements within our research questions in order to make the overall picture of our dataset coherent in combination with the algorithm. It should be also mentioned here that there were different expectations within our group as to how queries to the algorithm should be visualised. Only after a long back and forth, further editing of the research question and a meeting did we manage to adapt our research questions so that they match what the algorithm can visualize. This leads us to the point of the different skills and experiences from everyone in the group. As a result, we sometimes talked past each other in meetings.The communication, which went very well within the group in general, should have been edited earlier at a technical level. To see where everyone's level on this project is. A good example would be the joint determination of a language usage. This means, for example: Is pseudocode our algorithm? How “easy” is it to change codes? And how can/should we visualise our data?</p> 
 
 
+<h2>The algorithm in Pseudocode</h2>
+<code>
+    ALGORITHM Generate_Report<br>
+    <br>
+    INPUT: CSV file path, Markdown file path<br>
+    OUTPUT: Markdown report with keywords, articles, and word cloud<br>
+    <br>
+    BEGIN<br>
+        # Load the dataset<br>
+        LOAD CSV INTO dataframe df<br>
+        <br>
+        # Initialize variables<br>
+        SET removed_keywords TO empty list<br>
+        SET top_5_keywords TO empty list<br>
+        <br>
+        # Loop for displaying and removing top 5 keywords<br>
+        WHILE True DO<br>
+            IF top_5_keywords IS empty THEN<br>
+                SET all_keywords TO explode and clean keywords from df<br>
+                SET keyword_counts TO top 5 keyword counts from all_keywords<br>
+                SET top_5_keywords TO indices of keyword_counts<br>
+            ELSE<br>
+                SET all_keywords TO explode and clean keywords from df<br>
+                SET keyword_counts TO all keyword counts from all_keywords<br>
+                SET top_5_keywords TO filter out removed keywords from keyword_counts<br>
+                <br>
+            PRINT top 5 keywords and frequencies<br>
+            <br>
+            # Get user input for removing keywords<br>
+            SET user_input TO get user input<br>
+            IF user_input IS 'done' THEN<br>
+                BREAK<br>
+            ELSE<br>
+                PARSE user_input<br>
+                UPDATE removed_keywords and top_5_keywords<br>
+                <br>
+        # Create string of all keywords and their frequencies<br>
+        SET all_keywords_str TO create string from top_5_keywords<br>
+        <br>
+        # Filter dataframe for articles matching top 5 keywords<br>
+        SET filtered_df TO filter df based on top_5_keywords<br>
+        <br>
+        # Generate and save word cloud<br>
+        SET descriptions_top_keywords TO join descriptions from filtered_df<br>
+        GENERATE word cloud from descriptions_top_keywords<br>
+        SAVE word cloud as SVG and PNG files<br>
+        <br>
+        # Write results to markdown file<br>
+        OPEN markdown file for writing<br>
+        WRITE dataset report header<br>
+        WRITE top 5 keywords and their frequencies<br>
+        WRITE all keywords and their frequencies<br>
+        WRITE articles matching top 5 keywords<br>
+        WRITE wordcloud image embedding (SVG with PNG fallback)<br>
+    END
 
+</code>
 
-            <h3>The algorithm in Python</h3>
+            <h2>The algorithm in Python</h2>
                 <code>
 import pandas as pd<br>
 from wordcloud import WordCloud<br>
@@ -78,7 +134,7 @@ import matplotlib.pyplot as plt<br>
 <br>
 
 # Read the dataset from CSV<br>
-input_file_path = "NewsDB-Python/datasets/dataset.csv"<br>
+input_file_path = "/data/dataset.csv"<br>
 md_file_path = "Report.md"  # Replace with the desired markdown file path<br>
 df = pd.read_csv(input_file_path)<br>
 <br>
@@ -140,13 +196,13 @@ wordcloud = WordCloud(width=1200, height=960).generate(descriptions_top_keywords
 <br>
 # Save the word cloud as SVG<br>
 wordcloud_svg = wordcloud.to_svg(embed_font=False)<br>
-with open("NewsDB-Python/reports/Descriptions_word_cloud.svg", "w") as f:<br>
+with open("data/img/Descriptions_word_cloud.svg", "w") as f:<br>
     f.write(wordcloud_svg)<br>
     <br>
 # Save the word cloud as PNG<br>
-wordcloud.to_file("NewsDB-Python/reports/Descriptions_word_cloud.png")<br>
+wordcloud.to_file("data/img/Descriptions_word_cloud.png")<br>
 <br>
-print("Word cloud saved to NewsDB-Python/reports/Descriptions_word_cloud.svg and Descriptions_word_cloud.png")<br>
+print("Word cloud saved to data/img/Descriptions_word_cloud.svg and Descriptions_word_cloud.png")<br>
 <br>
 # Write the results to a markdown file<br>
 with open(md_file_path, 'w') as md:<br>
@@ -189,7 +245,7 @@ with open(md_file_path, 'w') as md:<br>
             article_idx += 1<br>
             <br>
     md.write("\n\n**Wordcloud based on the descriptions of the articles matching the top five keywords**\n\n")<br>
-    md.write('<img src="NewsDB-Python/reports/Descriptions_word_cloud.svg" onerror="this.onerror=null;this.src=\'NewsDB-Python/reports/Descriptions_word_cloud.png\';">')<br>
+    md.write('<img src="data/img/Descriptions_word_cloud.svg" onerror="this.onerror=null;this.src=\'data/img/Descriptions_word_cloud.png\';">')<br>
     <br>
 print(f"Results saved to {md_file_path}")
                 </code>
