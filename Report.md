@@ -141,4 +141,4 @@ Other Social Sciences (3)
 
 **Wordcloud based on the descriptions of the articles matching the top five keywords**
 
-<img src="NewsDB-Python/reports/Descriptions_word_cloud.svg" onerror="this.onerror=null;this.src='NewsDB-Python/reports/Descriptions_word_cloud.png';">
+<img src="docs/img/Descriptions_word_cloud.svg" onerror="this.onerror=null;this.src='docs/img/Descriptions_word_cloud.png';">
