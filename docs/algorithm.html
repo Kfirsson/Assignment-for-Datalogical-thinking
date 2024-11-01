@@ -241,7 +241,7 @@ with open(md_file_path, 'w', encoding="utf-8") as md:<br>
             title = article['title']<br>
             authors = '\n'.join([f"**{article_idx}.**  {author}" for author in article['authors']])<br>
             permalink = article['permalink']<br>
-            md.write(f"{authors} **|** <a href='{permalink}'>{title}</a>\n")<br>
+            md.write(f"{authors} **|** &lt;a href='{permalink}'&gt;{title}&lt;/a&gt;\n")<br>
             article_idx += 1<br>
             <br>
     md.write("\n\n**Wordcloud based on the descriptions of the articles matching the top five keywords**\n\n")<br>
