@@ -30,15 +30,15 @@ and this led us to believe that putting together the necessary dataset would be 
 
 <p>We conducted a quick initial search on Primo for <b>[google critique]</b> and this yielded a staggering 60,047 results.</p>
 
-<img src="img/curate1.jpg" alt="first search on Primo" align="middle" width="500" height="300"> 
+<img src="img/curate1.jpg" alt="first search on Primo"> 
 
 <p>This was quickly whittled down by refining the search to journal articles in peer-reviewed journals, published in English between 1998 and 2025. As the list was still rather long, we decided to try focusing on one journal only. We chose <i><a href="https://journals.sagepub.com/home/BDS" target="_blank">Big Data & Society</a></i>, an open access, peer-reviewed scholarly journal that publishes “interdisciplinary work principally in the social sciences, humanities and computing and their intersections with the arts and natural sciences about the implications of Big Data for societies”. We felt that this would give us a broad enough range of writing in our dataset. This refined search returned a manageable list of 187 results from Primo.</p> 
 
-<img src="img/curate2.jpg" alt="first search on Primo refined" align="middle" width="500" height="300"> 
+<img src="img/curate2.jpg" alt="first search on Primo refined"> 
 
 <p>We requested this list from Primo, turned it into a Google Sheet and rolled up our sleeves to parse and study our data. This included splitting the spreadsheet columns, using the <a href= "https://www.freewordcloudgenerator.com/" target="_blank">Free Word Cloud Generator</a> to create word clouds for the Title, Abstract and Keyword columns (to give us a better understanding of the issues/topics/concepts being written about), generating a list of the most common keywords and their frequencies, and simply reading through the individual entries.</p>
 
-<img src="img/curate4.jpg" alt="word clouds for first search" align="middle" width="700" height="300">
+<img src="img/curate4.jpg" alt="word clouds for first search">
 
 <p>We quickly agreed that this initial dataset had a few obvious limitations:</p>
 
@@ -54,7 +54,7 @@ and this led us to believe that putting together the necessary dataset would be 
 
 <p>We changed the search terms to <b>[“google critique” OR “criticizing google” OR “critical of google”]</b>. This yielded a smaller set of 715 results — further refining it, to only peer-reviewed journals, reduced it to a manageable dataset with 53 results.</p>
 
-<img src="img/curate5.jpg" alt="second Primo search refined" align="middle" width="500" height="300">
+<img src="img/curate5.jpg" alt="second Primo search refined">
 
 <p>Although we briefly entertained conducting additional searches for the sake of comparison, using different strategies to further refine the results and better hone in on our research focus, we agreed that the search results offered a solid dataset and that we should proceed to the next stages of the project. We thus requested the list once more from Primo and set about curating it.</p>
  
@@ -81,7 +81,7 @@ and this led us to believe that putting together the necessary dataset would be 
 
 <p>As we started running the code and looking at the output, we realized that we had one more curation task to complete. Our keywords included some that we decided were ‘empty’ terms (such as Google or article) and not only concepts that we expected to find in the context of our dataset (such as internet censorship or surveillance capitalism) but also many related to fields of study (such as Media and Communications or Science & Technology) or even research methodologies (such as automated content analysis or methodological problems). Instead of manually editing these out, we opted to leave some of the final curation to the algorithm and the user. Thanks to a few lines of code, the algorithm starts out by displaying the top 5 keywords for review. The user can omit ones of their choosing and the algorithm will display a new updated list; this process is repeated until the user is satisfied with the top 5 keywords and only then does the algorithm move on to the other tasks. Below is a screenshot of how this works in practice:</p>
 
-<img src="img/curate6.jpg" alt="Python code for removing unwanted keywords" align="middle" width="600" height="400">
+<img src="img/curate6.jpg" alt="Python code for removing unwanted keywords">
 
 
 <p>Our complete dataset in CSV-format is <a href="https://github.com/Kfirsson/Assignment-for-Datalogical-thinking/blob/main/data/dataset.csv" target="_blank">here</a> on GitHub.</p>
