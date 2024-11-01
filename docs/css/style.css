@@ -101,5 +101,6 @@ footer{
 img.copyright_logo {
   width: 1vw;
   margin:.15vw;
+  display: inline;
 }
 
